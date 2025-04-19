@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow-x: hidden;
+      }
+      .background-layer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0;
+        transition: opacity 1.5s ease-in-out;
+        z-index: -1;
+      }
+    </style>
+</head>
+<body data-bg-image="{{ url_for('static', filename='images/' ~ weather.bg_image) if weather else '' }}">
+
+    <!-- Background Layers -->
+    <div id="bg1" class="background-layer"></div>
+    <div id="bg2" class="background-layer"></div>
+
+    <div class="container">
+        <h1>Weather App 🌤️</h1>
+
+        <!-- Dark mode toggle -->
+        <button id="toggle-theme" class="btn">Toggle Dark Mode 🌙</button>
+
+        
+        <form method="POST" id="city-form">
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: center;">
+                <input type="text" name="city" placeholder="Enter city..." value="{{ weather['city'] if weather else '' }}" class="input">
+                <button type="submit" class="btn">Get Weather</button>
+        
+                <!-- 📍 Use My Location Button -->
+                <button type="button" id="detect-btn" class="btn">Use My Location 📍</button>
+        
+                {% if weather %}
+                <button type="submit" class="btn" id="refresh-btn">Refresh Weather 🔄</button>
+                {% endif %}
+            </div>
+            <!-- Spinner for location detecting -->
+           <div id="location-spinner" style="display:none; margin-top:10px;">
+                <p>Detecting Location... 🔄</p>
+           </div>
+
+        </form>
+        
+
+        {% if weather %}
+        <div class="weather-info">
+            <h2>{{ weather['city'] }}</h2>
+            <p>Temperature: {{ weather['temperature'] }}°C</p>
+            <p>Description: {{ weather['description'].title() }}</p>
+            <p>Local Time: {{ weather['local_time'] }}</p>
+            <img src="https://openweathermap.org/img/wn/{{ weather['icon'] }}@2x.png" alt="Weather icon">
+        </div>
+        {% endif %}
+
+        {% if forecast %}
+        <div class="row mt-5" id="forecast-container">
+            {% for day in forecast %}
+            <div class="col-md-2 col-6 mb-3 forecast-card">
+                <div class="weather-card text-center">
+                    <p>{{ day['date'] }}</p>
+                    <img src="https://openweathermap.org/img/wn/{{ day['icon'] }}@2x.png" alt="Icon" width="60">
+                    <p>{{ day['temp'] }}°C</p>
+                    <small>{{ day['description'].title() }}</small>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>

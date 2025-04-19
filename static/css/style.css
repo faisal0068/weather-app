@@ -1,0 +1,148 @@
+/* Global Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-size: cover;
+    background-position: center;
+    transition: background 0.5s ease-in-out;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.btn {
+    padding: 0.6rem 1.2rem;
+    margin: 0.5rem;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+/* Input and form */
+input[type="text"] {
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    margin-right: 10px;
+    font-size: 1rem;
+    width: 250px;
+    transition: 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #4CAF50;
+    outline: none;
+}
+
+/* Weather Info */
+.weather-info {
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    display: inline-block;
+    animation: fadeIn 1s ease;
+}
+
+.weather-info img {
+    margin-top: 1rem;
+}
+
+/* Forecast Section */
+#forecast-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.forecast-card {
+    flex: 1 0 21%;
+    margin: 10px;
+    max-width: 180px;
+    min-width: 140px;
+}
+
+#location-spinner {
+    font-size: 1.2rem;
+    color: #007bff;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.weather-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(6px);
+    padding: 1rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease;
+}
+
+.weather-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+    background-color: #1e1e1e;
+    color: #eee;
+}
+
+[data-theme="dark"] .weather-info,
+[data-theme="dark"] .weather-card {
+    background: rgba(30, 30, 30, 0.8);
+    color: #eee;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Background crossfade layers */
+.background-layer {
+    transition: opacity 1.5s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .forecast-card {
+        flex: 1 0 45%;
+    }
+}
+
+@media (max-width: 480px) {
+    input[type="text"] {
+        width: 80%;
+        margin-bottom: 1rem;
+    }
+}
