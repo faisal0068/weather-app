@@ -28,7 +28,7 @@
       }
     </style>
 </head>
-<body data-bg-image="{{ url_for('static', filename='images/' ~ weather.bg_image) if weather else '' }}">
+<body data-bg-image="{{ url_for('static', filename='images/' ~ weather.bg_image)'' }}">
 
     <!-- Background Layers -->
     <div id="bg1" class="background-layer"></div>
